@@ -37,9 +37,26 @@
   }
 }
 
+.header-wrapper {
+  border-bottom: #888 solid 1px;
+}
+
+.logo-wrapper {
+  display: block;
+  margin-top: 40px;
+}
+
+.main-logo {
+  width: 100px;
+}
+
 /*** Products ***/
 .product-card {
-  margin: auto;
+  
   margin-left: 100px;
   margin-bottom: 40px;
+}
+
+.content-products {
+  margin-top: 50px !important;
 }

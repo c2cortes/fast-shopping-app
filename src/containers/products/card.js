@@ -20,6 +20,8 @@ const useStyles = makeStyles({
 export default function MediaCard(props) {
   const classes = useStyles();
 
+  console.log('props => ', props);
+
   return (
     <Card className={classes.root} classes={{ root: 'product-card' }}>
       <CardActionArea>
@@ -38,7 +40,7 @@ export default function MediaCard(props) {
         </CardContent>
       </CardActionArea>
       <CardActions>
-        <Button size="small" color="primary">
+        <Button size="small" color="primary" onClick={ () => props.addProductToCart(props.item) }>
           Add to Cart
         </Button>
         <Button size="small" color="primary">

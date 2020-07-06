@@ -3,9 +3,11 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { bindActionCreators } from 'redux';
 import { fetchProducts } from '../../actions/index';
+import { addProductToCart } from '../../actions/index';
 
 import Grid from '@material-ui/core/Grid';
  import Card from './card';
+ import Header from '../common/header';
 
 class Products extends Component {
 
@@ -34,15 +36,15 @@ class Products extends Component {
 		return(
 			<div className="main-container">
 				<Grid container item xs={12} spacing={3}>
-					<Grid container spacing={12} xs={1}>
-						
+					<Grid container spacing={1} xs={12}>
+						<Header />
 					</Grid>
 					<Grid container spacing={1} xs={1}></Grid>
-					<Grid container spacing={1} xs={10}>
-						{ this.props.products.map((item) => {
+					<Grid container spacing={1} xs={10} classes={{ root: 'content-products' }}>
+						{ this.props.products.products.map((item) => {
 							return (
 								<Grid container item xs={4} spacing={3}>
-									<Card item={item} />
+									<Card item={item} addProductToCart={ (item) => this.props.addProductToCart(item) } />
 								</Grid>
 							)
 						}) }
@@ -61,7 +63,7 @@ function mapStateToProps(state){
 }
 
 function mapDispatchToProps(dispatch){
-	return bindActionCreators({ fetchProducts }, dispatch);
+	return bindActionCreators({ fetchProducts, addProductToCart }, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Products);
