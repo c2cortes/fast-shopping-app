@@ -14,7 +14,6 @@ export default function(state = initialState, action){
             };
 			
 		case ADD_PRODUCT_TO_CART:
-            console.log('state => ', state);
             return Object.assign({}, state, {
                 cartItems: [
                   ...state.cartItems,

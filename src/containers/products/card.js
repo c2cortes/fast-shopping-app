@@ -20,14 +20,12 @@ const useStyles = makeStyles({
 export default function MediaCard(props) {
   const classes = useStyles();
 
-  console.log('props => ', props);
-
   return (
     <Card className={classes.root} classes={{ root: 'product-card' }}>
       <CardActionArea>
         <CardMedia
           className={classes.media}
-          image="/img/hamburguesa.png"
+          image={`/img/${props.item.image}`}
           title="Contemplative Reptile"
         />
         <CardContent>

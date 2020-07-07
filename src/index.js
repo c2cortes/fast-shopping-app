@@ -10,6 +10,7 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import reducers from './reducers';
 
 import Products from './containers/products/products.js'
+import Cart from './containers/products/cart.js'
 
 const createStoreWithMiddleware = applyMiddleware(ReduxPromise)(createStore);
 
@@ -18,10 +19,8 @@ ReactDOM.render(
     <BrowserRouter>
     	<div>
     		<Switch>
-
+          <Route path="/cart" component={Cart}/>
           <Route path="/" component={Products}/>
-          {/* <Route path="/" component={LoginView}/> */}
-          
 		    </Switch>
     	</div>
     </BrowserRouter>
