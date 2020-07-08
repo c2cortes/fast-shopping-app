@@ -1,8 +1,9 @@
-import { FETCH_PRODUCTS, ADD_PRODUCT_TO_CART} from '../actions/index';
+import { FETCH_PRODUCTS, ADD_PRODUCT_TO_CART, SET_TOTAL} from '../actions/index';
 
 const initialState = {
     products: [],
-    cartItems: []
+    cartItems: [],
+    total: 0
   };
 
 export default function(state = initialState, action){
@@ -22,6 +23,14 @@ export default function(state = initialState, action){
                     completed: false
                   }
                 ]
+              })
+    
+    case SET_TOTAL:
+            const item = state.cartItems.find(element => element.product._id == action.payload._id);
+            return Object.assign({}, state, {
+                total: 
+                  state.total += parseInt(action.payload)
+                
               })
 	}
 	return state;

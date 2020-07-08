@@ -4,9 +4,7 @@ export const AUTH = 'AUTH';
 
 export const FETCH_PRODUCTS = 'FETCH_PRODUCTS';
 export const ADD_PRODUCT_TO_CART = 'ADD_PRODUCT_TO_CART';
-export const STORE_PROJECT = 'STORE_PROJECT';
-export const CURRENT_PROJECT = 'CURRENT_PROJECT';
-export const STORE_PROJECT_RESPONSE = 'STORE_PROJECT_RESPONSE';
+export const SET_TOTAL = 'SET_TOTAL';
 
 export const API_URL = 'http://localhost:3000/';
 
@@ -44,6 +42,14 @@ export function addProductToCart(item) {
     console.log('item =>=>=> ', item);
 	return{
 		type: ADD_PRODUCT_TO_CART,
+		payload: item
+	}
+}
+
+export function setTotal(item) {
+	console.log('item => ', item);
+	return{
+		type: SET_TOTAL,
 		payload: item
 	}
 }

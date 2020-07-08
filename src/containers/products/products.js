@@ -44,7 +44,7 @@ class Products extends Component {
 						{ this.props.products.products != null ? 
 							this.props.products.products.map((item) => {
 								return (
-									<Grid container item xs={4} spacing={3}>
+									<Grid container item xs={12} sm={4} md={4} spacing={3}>
 										<Card item={item} addProductToCart={ (item) => this.props.addProductToCart(item) } />
 									</Grid>
 								)
