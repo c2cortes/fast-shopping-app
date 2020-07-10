@@ -1,50 +1,29 @@
 import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import Card from '@material-ui/core/Card';
-import CardActionArea from '@material-ui/core/CardActionArea';
-import CardActions from '@material-ui/core/CardActions';
-import CardContent from '@material-ui/core/CardContent';
-import CardMedia from '@material-ui/core/CardMedia';
-import Button from '@material-ui/core/Button';
-import Typography from '@material-ui/core/Typography';
+import { connect } from 'react-redux';
 
-const useStyles = makeStyles({
-  root: {
-    maxWidth: 345,
-  },
-  media: {
-    height: 140,
-  },
-});
+import { addProductToCart } from './thunks';
 
-export default function MediaCard(props) {
-  const classes = useStyles();
-
+const MediaCard = props => {
   return (
-    <Card className={classes.root} classes={{ root: 'product-card' }}>
-      <CardActionArea>
-        <CardMedia
-          className={classes.media}
-          image={`/img/${props.item.image}`}
-          title="Contemplative Reptile"
-        />
-        <CardContent>
-          <Typography gutterBottom variant="h5" component="h2">
-            {props.item.name}
-          </Typography>
-          <Typography variant="body2" color="textSecondary" component="p">
-            {props.item.description}
-          </Typography>
-        </CardContent>
-      </CardActionArea>
-      <CardActions>
-        <Button size="small" color="primary" onClick={ () => props.addProductToCart(props.item) }>
-          Add to Cart
-        </Button>
-        <Button size="small" color="primary">
-          ${props.item.price}
-        </Button>
-      </CardActions>
-    </Card>
+    <div className="col-sm-6 col-md-4 product">
+      <img src={`../assets/img/products/${props.item.image}`} alt="HP Chromebook 11" />
+
+      <div className="content">
+        <h1 className="h4">{props.item.name}</h1>
+        <p className="price">${props.item.price}</p>
+        <p>{props.item.description}</p>
+        {/* <label>Laptops</label> */}
+
+        <button className="btn btn-primary btn-rounded btn-sm" onClick={ () => props.onPressAddToCart(props.item) }> <i className="ion-bag"></i> Add to cart</button>
+      </div>
+    </div>
   );
 }
+
+const mapStateToProps = state => ({});
+
+const mapDispatchToProps = dispatch => ({
+  onPressAddToCart: item => dispatch(addProductToCart(item))
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(MediaCard);

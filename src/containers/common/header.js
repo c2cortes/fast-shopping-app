@@ -1,10 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { bindActionCreators } from 'redux';
-import { fetchProducts } from '../../actions/index';
-
-import Grid from '@material-ui/core/Grid';
+import { loadProducts } from '../products/thunks';
 import { IoIosCart } from 'react-icons/io';
 
 class Header extends Component {
@@ -14,47 +11,48 @@ class Header extends Component {
 		this.state = {}
 	}
 
-	componentDidMount() {
-	}
-
-	// shouldComponentUpdate(nextProps, nextState){
-	// 	this.setState({ cartItems: nextProps.products.cartItems.length });
-	// 	console
-	// }
-
 	render() {
-
 		return (
-			<Grid container item xs={12} spacing={3} classes={{ root: 'header-wrapper' }}>
-				<Grid container spacing={1} xs={2}></Grid>
-				<Grid container spacing={1} xs={8}>
-					<Link to={'/'} >			
-						<div className="logo-wrapper">
-							<img className="main-logo" src="/img/logo.svg"></img>
-						</div>
-					</Link>
-				</Grid>
-				<Grid container spacing={1} xs={2}>
-					<Link to={'/cart'} className="cart-icon">			
-						<IoIosCart size="30px" color="#333" />
-						<div className="cant-products-cart">
-							{this.props.products.cartItems.length}
-						</div>
-					</Link>
-				</Grid>
-			</Grid>
+			<nav className="navbar navbar-default">
+				<div className="container">
+					<div className="navbar-header">
+						<button type="button" className="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+							<span className="sr-only">Toggle navigation</span>
+							<span className="icon-bar"></span>
+							<span className="icon-bar"></span>
+							<span className="icon-bar"></span>
+						</button>
+						<a className="navbar-brand" href="./"> <i className="ion-cube"></i> Unistore</a>
+					</div>
+
+					<div id="navbar" className="navbar-collapse collapse">
+						<ul className="nav navbar-nav">
+							<li><a href="../">Home</a></li>
+							<li><a href="../catalog/">Catalog</a></li>
+						</ul>
+						<ul className="nav navbar-nav navbar-right">
+							<li>
+								<Link to={'/cart'} className="cart-icon">			
+									<IoIosCart size="30px" color="#333"/>
+									<div className="cant-products-cart">
+										{this.props.products.cartItems.length}
+									</div>
+								</Link>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</nav>
 		)
 	}
 }
 
-function mapStateToProps(state) {
-	return {
-		products: state.products
-	}
-}
+const mapStateToProps = state => ({
+	products: state.products,
+})
 
-function mapDispatchToProps(dispatch) {
-	return bindActionCreators({ fetchProducts }, dispatch);
-}
+const mapDispatchToProps = dispatch => ({
+	fetchProducts: () => dispatch(loadProducts()),
+});
 
 export default connect(mapStateToProps, mapDispatchToProps)(Header);

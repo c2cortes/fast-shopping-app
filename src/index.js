@@ -1,29 +1,35 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { persistStore } from 'redux-persist';
+import { PersistGate } from 'redux-persist/lib/integration/react';
 import { Provider } from 'react-redux';
-import { createStore, applyMiddleware } from 'redux';
-import ReduxPromise from 'redux-promise';
+import { configureStore } from './store';
+
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
-import reducers from './reducers';
 
-import Products from './containers/products/products.js'
-import Cart from './containers/products/cart.js'
+import Products from './containers/products/products.js';
+import Cart from './containers/products/cart.js';
 
-const createStoreWithMiddleware = applyMiddleware(ReduxPromise)(createStore);
+const store = configureStore();
+const persistor = persistStore(store);
 
 ReactDOM.render(
-  <Provider store={createStoreWithMiddleware(reducers)}>
-    <BrowserRouter>
-    	<div>
-    		<Switch>
-          <Route path="/cart" component={Cart}/>
-          <Route path="/" component={Products}/>
-		    </Switch>
-    	</div>
-    </BrowserRouter>
+  <Provider store={store}>
+    <PersistGate
+      loading={<div>Loading persistor...</div>}
+      persistor={persistor}>
+      <BrowserRouter>
+        <div>
+          <Switch>
+            <Route path="/cart" component={Cart}/>
+            <Route path="/" component={Products}/>
+          </Switch>
+        </div>
+      </BrowserRouter>
+    </PersistGate>
   </Provider>,
   document.getElementById('root')
 );
