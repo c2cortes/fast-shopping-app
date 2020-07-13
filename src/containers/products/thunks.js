@@ -1,14 +1,8 @@
-import axios from 'axios';
 import { fetchProducts, addProductToCartAction } from './actions';
-
-export const API_URL = 'http://localhost:3000/';
+import Http from '../api/HttpRequest';
 
 export const loadProducts = () => async (dispatch, getState) => {
-    // const response = await fetch('http://localhost:3000/products');
-    // const products = await response.json();
-    
-    const url = `${API_URL}products`;
-    const request = await axios.get(url);
+    const request = await Http.get('products')
     dispatch(fetchProducts(request.data));
 }
 

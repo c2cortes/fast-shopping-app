@@ -12,6 +12,7 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom';
 
 import Products from './containers/products/products.js';
 import Cart from './containers/products/cart.js';
+import Checkout from './containers/checkout/checkout.js';
 
 const store = configureStore();
 const persistor = persistStore(store);
@@ -25,6 +26,7 @@ ReactDOM.render(
         <div>
           <Switch>
             <Route path="/cart" component={Cart}/>
+            <Route path="/checkout" component={Checkout}/>
             <Route path="/" component={Products}/>
           </Switch>
         </div>

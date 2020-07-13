@@ -55,9 +55,9 @@ class Cart extends Component {
 									<div className="checkout-cart">
 										<div className="content">
 											{this.props.products.cartItems != null ?
-												this.props.products.cartItems.map((item) => {
+												this.props.products.cartItems.map((item, index) => {
 													return (
-														<CartItem item={item} setParentTotal={(item) => this.props.setTotal(item)} key={item.id} />
+														<CartItem item={item} setParentTotal={(item) => this.props.setTotal(item)} key={index} />
 													)
 												}) : null
 											}
@@ -96,8 +96,9 @@ class Cart extends Component {
 										</div>
 									</div>
 									<hr className="offset-md" />
-
-									<a href="../checkout/" className="btn btn-primary btn-lg justify"><i className="ion-android-checkbox-outline"></i>&nbsp;&nbsp; Checkout order</a>
+									<Link to={'/checkout'} className="btn btn-primary btn-lg justify">			
+										<i className="ion-android-checkbox-outline"></i>&nbsp;&nbsp; Checkout order
+									</Link>
 									<hr className="offset-md" />
 
 									<p>Pay your order in the most convenient way</p>
