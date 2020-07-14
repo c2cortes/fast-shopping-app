@@ -35,7 +35,7 @@ class Header extends Component {
 								<Link to={'/cart'} className="cart-icon">			
 									<IoIosCart size="30px" color="#333"/>
 									<div className="cant-products-cart">
-										{this.props.products.cartItems.length}
+										{this.props.products && this.props.products.cartItems ? this.props.products.cartItems.length : '0'}
 									</div>
 								</Link>
 							</li>

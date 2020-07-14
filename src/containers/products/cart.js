@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { bindActionCreators } from 'redux';
 import { fetchProducts } from './actions';
-import { addProductToCart } from './actions';
+import { addProductToCartAction } from './actions';
 import { setTotal } from './actions';
 
 import CartItem from './cartItem';
@@ -126,7 +126,7 @@ function mapStateToProps(state) {
 }
 
 function mapDispatchToProps(dispatch) {
-	return bindActionCreators({ fetchProducts, addProductToCart, setTotal }, dispatch);
+	return bindActionCreators({ fetchProducts, addProductToCartAction, setTotal }, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Cart);

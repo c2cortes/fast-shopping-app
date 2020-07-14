@@ -33,7 +33,6 @@ const NewCustomerForm = (props) => {
                         />
                         <br />
                     </div>
-
                     <div className="col-sm-3">
                         <label>ID*</label><br />
                     </div>
@@ -42,7 +41,6 @@ const NewCustomerForm = (props) => {
                             value={identification} onChange={ (e) => setIdentification(e.target.value) }
                         /><br />
                     </div>
-
                     <div className="col-sm-3">
                         <label>Address*</label><br />
                     </div>
@@ -51,7 +49,6 @@ const NewCustomerForm = (props) => {
                             value={address} onChange={ (e) => setAddress(e.target.value) }
                         /><br />
                     </div>
-
                     <div className="col-sm-3">
                         <label>Phone*</label><br />
                     </div>
@@ -60,7 +57,6 @@ const NewCustomerForm = (props) => {
                             value={phone} onChange={ (e) => setPhone(e.target.value) }
                         /><br />
                     </div>
-
                     <div className="col-sm-3">
                         <label>Email*</label><br />
                     </div>

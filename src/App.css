@@ -113,3 +113,12 @@
 .btn-confirm-order-existing-customer {
   margin-top: 20px;
 }
+
+.thankyou-wrapper {
+  margin-top: 150px;
+  text-align: center;
+}
+
+.btn-start-again {
+  margin-top: 30px;
+}

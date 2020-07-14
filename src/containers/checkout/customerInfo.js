@@ -1,7 +1,6 @@
-import React, { useState } from 'react';
+import React from 'react';
 
 const CustomerInfo = (props) => {
-    console.log('props =>=>=>=> CustomerInfo', props);
     return (
         <div className="container-fluid">
             <div className="row">
@@ -19,7 +18,7 @@ const CustomerInfo = (props) => {
                 </div>
 
                 <div className="col-sm-12 btn-confirm-order-existing-customer">
-                    <button className="btn btn-primary btn-lg justify"><i className="ion-compose"></i>&nbsp;&nbsp; Confirm order</button>
+                    <button onClick={ () => props.sendData() } className="btn btn-primary btn-lg justify"><i className="ion-compose"></i>&nbsp;&nbsp; Confirm order</button>
                 </div>
             </div>
         </div>

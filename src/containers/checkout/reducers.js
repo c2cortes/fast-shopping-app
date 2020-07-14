@@ -1,4 +1,4 @@
-import { UPDATE_CUSTOMER_INFO, SET_CUSTOMER_FORM_MESSAGE } from './actions';
+import { UPDATE_CUSTOMER_INFO, SET_CUSTOMER_FORM_MESSAGE, UPDATE_ORDER_CODE } from './actions';
 
 const initialState = {
     customerInfo: ''
@@ -17,6 +17,11 @@ export const checkout = (state = initialState, action) => {
                 ...state,
                 customerInfoMessage: payload
             };
+        case UPDATE_ORDER_CODE:
+            return {
+                ...state,
+                orderCode: payload
+            }
         default:
             return state;
     }
