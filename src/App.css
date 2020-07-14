@@ -103,3 +103,13 @@
   border-bottom: #333 solid 1px !important;
   border-bottom-style: dotted !important;
 }
+
+.customer-info-message{
+  text-align: center;
+  color: rgb(245, 13, 13);
+  margin-top: 20px;
+}
+
+.btn-confirm-order-existing-customer {
+  margin-top: 20px;
+}

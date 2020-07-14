@@ -2,17 +2,11 @@ import React, {useState} from 'react';
 
 const NewCustomerForm = (props) => {
 
-    // const [name, setName] = useState('');
-    // const [id, setId] = useState('')
-    // const [address, setAddress] = useState('')
-    // const [phone, setPhone] = useState('')
-    // const [email, setEmail] = useState('')
-    
-    const [name, setName] = useState('Cristian Cortes');
-    const [identification, setIdentification] = useState('1020399387')
-    const [address, setAddress] = useState('Av 41D # 62-169')
-    const [phone, setPhone] = useState('3005983220')
-    const [email, setEmail] = useState('cristiansk311@gmail.com')
+    const [name, setName] = useState('');
+    const [identification, setIdentification] = useState('')
+    const [address, setAddress] = useState('')
+    const [phone, setPhone] = useState('')
+    const [email, setEmail] = useState('')
 
     const handleSubmit = (event) => {
         event.preventDefault();

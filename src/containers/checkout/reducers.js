@@ -1,35 +1,22 @@
-import { FETCH_PRODUCTS, ADD_PRODUCT_TO_CART, SET_TOTAL } from './actions';
+import { UPDATE_CUSTOMER_INFO, SET_CUSTOMER_FORM_MESSAGE } from './actions';
 
 const initialState = {
-    products: [],
-    cartItems: [],
-    total: 0
+    customerInfo: ''
 };
 
-export const products = (state = initialState, action) => {
+export const checkout = (state = initialState, action) => {
     const { type, payload } = action;
-
     switch (type) {
-        case FETCH_PRODUCTS:
+        case UPDATE_CUSTOMER_INFO:
             return {
                 ...state,
-                products: payload
+                customerInfo: payload
             };
-        case ADD_PRODUCT_TO_CART:
-            return Object.assign({}, state, {
-                cartItems: [
-                    ...state.cartItems,
-                    {
-                        product: action.payload,
-                        completed: false
-                    }
-                ]
-            })
-        case SET_TOTAL:
-            return Object.assign({}, state, {
-                total:
-                    state.total += parseInt(action.payload)
-            })
+        case SET_CUSTOMER_FORM_MESSAGE:
+            return {
+                ...state,
+                customerInfoMessage: payload
+            };
         default:
             return state;
     }

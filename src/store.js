@@ -6,9 +6,11 @@ import thunk from 'redux-thunk';
 import { composeWithDevTools } from 'redux-devtools-extension';
 
 import { products } from './containers/products/reducers';
+import { checkout } from './containers/checkout/reducers';
 
 const reducer = {
     products,
+    checkout
 };
 
 const persistConfig = {

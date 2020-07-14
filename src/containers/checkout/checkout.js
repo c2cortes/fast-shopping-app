@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 
 import { addProductToCart } from './thunks';
@@ -7,19 +7,26 @@ import Header from '../common/header';
 import NewCustomerForm from './newCustomerForm';
 import ExistingCustomerForm from './existingCustomerForm';
 import Summary from './summary';
+import CustomerInfo from './customerInfo';
 
 const Checkout = props => {
 
-    const [customerForm, setCustomerForm] = useState(1);
+    const [customerForm, setCustomerForm] = useState(2);
+    const [customerInfo, setCustomerInfo] = useState();
 
     const handleOptionChange = (e) => {
         setCustomerForm(e.target.value);
     }
 
+    useEffect(() => {
+        console.log('customerInfo this is => ', customerInfo);
+        if(props.checkout && props.checkout.customerInfo && props.checkout.customerInfo.customer) {
+            setCustomerInfo(props.checkout.customerInfo.customer);
+        }
+        
+    }, [props.checkout])
+
     return (
-        // if (!this.props.products.products) {
-        //     return (<div>There is not connection to the server...</div>)
-        // }
         <div>
             <Header />
             <div className="box">
@@ -54,6 +61,7 @@ const Checkout = props => {
                                 { customerForm == 1 ? <NewCustomerForm sendData={ (data) => props.onSubmitForm(data, JSON.stringify(props.products.cartItems)) } /> : <ExistingCustomerForm /> }
                             </div>
                         </div>
+                        { customerInfo ? <CustomerInfo customerInfo={customerInfo} /> : null }
                     </div>
                     <div className="col-sm-6 col-md-6">
                         <hr className="offset-sm visible-sm" />
@@ -63,11 +71,11 @@ const Checkout = props => {
             </div>
         </div>
     )
-
 }
 
 const mapStateToProps = state => ({
     products: state.products,
+    checkout: state.checkout
 })
 
 const mapDispatchToProps = dispatch => ({
