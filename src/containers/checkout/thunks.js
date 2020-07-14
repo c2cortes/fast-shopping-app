@@ -7,7 +7,7 @@ export const addProductToCart = (item, cartItems) => async (dispatch, getState) 
         data: item,
         cartItems
     }).then((respose) => {
-        if(respose.status == 201){
+        if(respose.status === 201){
             dispatch(updateOrderCode(respose.data.code));
         }
     }).catch(error => {
@@ -17,7 +17,7 @@ export const addProductToCart = (item, cartItems) => async (dispatch, getState) 
 
 export const validateExistingCustomer = (email) => async (dispatch, getState) => {
     await Http.get(`customer/${email}`).then((response) => {
-        if(response.status == 200){
+        if(response.status === 200){
             if(response.data){
                 dispatch(setCustomerFormMessage(''))
                 dispatch(updateCustomerInfo(response.data));

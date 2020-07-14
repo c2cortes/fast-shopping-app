@@ -1,4 +1,4 @@
-import { FETCH_PRODUCTS, ADD_PRODUCT_TO_CART, SET_TOTAL, RESET_CART } from './actions';
+import { FETCH_PRODUCTS, ADD_PRODUCT_TO_CART, SET_TOTAL, RESET_CART, SET_SUMMARY_TOTAL } from './actions';
 
 const initialState = {
     products: [],
@@ -25,10 +25,19 @@ export const products = (state = initialState, action) => {
                 ]
             })
         case SET_TOTAL:
-            return Object.assign({}, state, {
-                total:
-                    state.total += parseInt(action.payload)
-            })
+            const _cartItems = state.cartItems;
+            const productToUpdate = _cartItems.find(element => element.product.id === payload.id);
+            productToUpdate.product.cant = parseInt(payload.cant);
+
+            return {
+                ...state,
+                cartItems: _cartItems
+            }
+        case SET_SUMMARY_TOTAL:
+            return {
+                ...state,
+                summaryTotal: payload
+            };
         case RESET_CART:
             return {
                 ...state,

@@ -42,6 +42,7 @@ class Products extends Component {
 						<div className="col-sm-12 products">
 							{ this.props.products.products.products != null ? 
 								this.props.products.products.products.map((item) => {
+									item.cant = 1;
 									return <Card item={item} key={item.id} />
 								}) : null
 							}

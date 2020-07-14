@@ -2,6 +2,7 @@ export const FETCH_PRODUCTS = 'FETCH_PRODUCTS';
 export const ADD_PRODUCT_TO_CART = 'ADD_PRODUCT_TO_CART';
 export const SET_TOTAL = 'SET_TOTAL';
 export const RESET_CART = 'RESET_CART';
+export const SET_SUMMARY_TOTAL = 'SET_SUMMARY_TOTAL';
 
 export const API_URL = 'http://localhost:3000/';
 
@@ -22,6 +23,13 @@ export const addProductToCartAction = item => {
 export const setTotal = item => {
 	return{
 		type: SET_TOTAL,
+		payload: item
+	}
+}
+
+export const updateSummaryTotal = item => {
+	return{
+		type: SET_SUMMARY_TOTAL,
 		payload: item
 	}
 }

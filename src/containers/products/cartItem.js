@@ -1,10 +1,12 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import {updateTotal} from './thunks';
 
-export default function CartItem(props) {
+const CartItem = props => {
 
     const selectChange = (e) => {
         props.item.product.cant = e.target.value;
-        props.setParentTotal(props.item.product);
+        props.updateTotal(props.item.product);
     }
 
     return (
@@ -18,8 +20,8 @@ export default function CartItem(props) {
                 <p className="price">${props.item.product.price}</p>
             </div>
             <div className="controls">
-                <span className="input-group-btn">
-                    Qty:
+                <span className="">
+                    Qty: 
                 </span>
                 <select onChange={ (e) => selectChange(e) }>
                      <option value='1'>1</option>
@@ -32,3 +34,15 @@ export default function CartItem(props) {
         </div>
     );
 }
+
+function mapStateToProps(state) {
+	return {
+		products: state.products
+	}
+}
+
+const mapDispatchToProps = dispatch => ({
+    updateTotal: (item) => dispatch(updateTotal(item)),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(CartItem);

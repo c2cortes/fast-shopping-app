@@ -1,13 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
-import { bindActionCreators } from 'redux';
-import { fetchProducts } from './actions';
-import { addProductToCartAction } from './actions';
-import { setTotal } from './actions';
-
+import { loadProducts, setSummaryTotal } from './thunks';
 import CartItem from './cartItem';
 import Header from '../common/header';
+import CartSummary from './cartSummary';
 
 class Cart extends Component {
 
@@ -19,23 +15,27 @@ class Cart extends Component {
 		}
 	}
 
-	setParentTotal(totalParam) {
-		this.setState({ total: this.state.total += parseInt(totalParam) })
-	}
-
 	componentDidMount() {
 		this.props.fetchProducts();
 	}
 
 	UNSAFE_componentWillReceiveProps(nextProps) {
-		let total = 0;
+		// console.log('this.products => ', this.props.products);
+		// if(this.props.products.cartItems !== nextProps.products.cartItems) {
 
-		nextProps.products.cartItems.map((item) => {
-			item.product.cant = item.product.cant ? item.product.cant : 1
-			total += parseInt(item.product.price * item.product.cant);
-		});
+			
+		// 	console.log('nextProps => new CartItems', nextProps.products.cartItems);
+		// 	let total = 0;
 
-		this.setState({ total });
+		// 	nextProps.products.cartItems.map((item) => {
+		// 		item.product.cant = item.product.cant ? item.product.cant : 1
+		// 		total += parseInt(item.product.price * item.product.cant);
+		// 	});
+
+		// 	console.log('total => ', total);
+
+		// 	this.props.onSetTotal(total);
+		// }
 	}
 
 	render() {
@@ -48,6 +48,12 @@ class Cart extends Component {
 			<div>
 				<Header />
 				<div className="container">
+					<div className="box">
+                        <div className="container">
+                            <h1>Cart</h1>
+                        </div>
+                    </div>
+                    <hr className="offset-md"></hr>
 					<div className="row">
 						<div className="col-md-8">
 							<div className="panel panel-default">
@@ -57,7 +63,7 @@ class Cart extends Component {
 											{this.props.products.cartItems != null ?
 												this.props.products.cartItems.map((item, index) => {
 													return (
-														<CartItem item={item} setParentTotal={(item) => this.props.setTotal(item)} key={index} />
+														<CartItem item={item} key={index} />
 													)
 												}) : null
 											}
@@ -68,49 +74,7 @@ class Cart extends Component {
 						</div>
 						<div className="col-sm-8 col-md-4">
 							<hr className="offset-md visible-sm" />
-							<div className="panel panel-default">
-								<div className="panel-body">
-									<h2 className="no-margin">Summary</h2>
-									<hr className="offset-md" />
-
-									<div className="container-fluid">
-										<div className="row">
-											<div className="col-xs-6">
-												<p>Subtotal (7 items)</p>
-											</div>
-											<div className="col-xs-6">
-												<p><b>${this.state.total}</b></p>
-											</div>
-										</div>
-									</div>
-									<hr />
-
-									<div className="container-fluid">
-										<div className="row">
-											<div className="col-xs-6">
-												<h3 className="no-margin">Total sum</h3>
-											</div>
-											<div className="col-xs-6">
-												<h3 className="no-margin">${this.state.total}</h3>
-											</div>
-										</div>
-									</div>
-									<hr className="offset-md" />
-									<Link to={'/checkout'} className="btn btn-primary btn-lg justify">			
-										<i className="ion-android-checkbox-outline"></i>&nbsp;&nbsp; Checkout order
-									</Link>
-									<hr className="offset-md" />
-
-									<p>Pay your order in the most convenient way</p>
-									<div className="payment-icons">
-										<img src="../assets/img/payments/icon-paypal.svg" alt="paypal" />
-										<img src="../assets/img/payments/icon-visa.svg" alt="visa" />
-										<img src="../assets/img/payments/icon-mc.svg" alt="mc" />
-										<img src="../assets/img/payments/icon-discover.svg" alt="discover" />
-										<img src="../assets/img/payments/icon-ae.svg" alt="ae" />
-									</div>
-								</div>
-							</div>
+							<CartSummary/>
 						</div>
 					</div>
 				</div>
@@ -120,13 +84,12 @@ class Cart extends Component {
 }
 
 function mapStateToProps(state) {
-	return {
-		products: state.products
-	}
+	return { products: state.products }
 }
 
-function mapDispatchToProps(dispatch) {
-	return bindActionCreators({ fetchProducts, addProductToCartAction, setTotal }, dispatch);
-}
+const mapDispatchToProps = dispatch => ({
+	fetchProducts: () => dispatch(loadProducts()),
+	onSetTotal: (total) => dispatch(setSummaryTotal(total))
+});
 
 export default connect(mapStateToProps, mapDispatchToProps)(Cart);

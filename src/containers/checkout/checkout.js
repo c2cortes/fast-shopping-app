@@ -31,12 +31,12 @@ const Checkout = props => {
             props.onResetState();
         }
 
-    }, [props.checkout])
+    }, [props])
 
     return (
         <div>
             <Header />
-            {currentSection == 'checkout' ?
+            {currentSection === 'checkout' ?
                 <div>
                     <div className="box">
                         <div className="container">
@@ -67,7 +67,7 @@ const Checkout = props => {
                                             </div>
                                             <hr />
                                         </div>
-                                        {customerForm == 1 ? <NewCustomerForm sendData={(data) => props.onSubmitForm(data, JSON.stringify(props.products.cartItems))} /> : <ExistingCustomerForm />}
+                                        {customerForm === 1 ? <NewCustomerForm sendData={(data) => props.onSubmitForm(data, JSON.stringify(props.products.cartItems))} /> : <ExistingCustomerForm />}
                                     </div>
                                 </div>
                                 {customerInfo ? <CustomerInfo customerInfo={customerInfo} sendData={() => props.onSubmitForm(customerInfo, JSON.stringify(props.products.cartItems))} /> : null}
