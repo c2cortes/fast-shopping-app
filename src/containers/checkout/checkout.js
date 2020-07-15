@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 
-import { addProductToCart } from './thunks';
+import { createCustomerWithOrder } from './thunks';
 import { resetState } from './thunks';
 
 import Header from '../common/header';
@@ -13,8 +13,9 @@ import Thankyou from './thankyou';
 
 const Checkout = props => {
 
-    const [customerForm, setCustomerForm] = useState(2);
+    const [customerForm, setCustomerForm] = useState(1);
     const [customerInfo, setCustomerInfo] = useState();
+    const [orderCode, setOrderCode] = useState();
     const [currentSection, setCurrentSection] = useState('checkout');
 
     const handleOptionChange = (e) => {
@@ -22,11 +23,11 @@ const Checkout = props => {
     }
 
     useEffect(() => {
-        if (props.checkout && props.checkout.customerInfo && props.checkout.customerInfo.customer) {
-            setCustomerInfo(props.checkout.customerInfo.customer);
-        } 
+        setCustomerInfo(props.checkout.customerInfo.customer);
         
         if (props.checkout && props.checkout.orderCode) {
+            setCustomerInfo(props.checkout.customerInfo);
+            setOrderCode(props.checkout.orderCode);
             setCurrentSection('thankyou');
             props.onResetState();
         }
@@ -58,19 +59,19 @@ const Checkout = props => {
                                             <div className="col-sm-9">
                                                 <div className="col-sm-6">
                                                     <input type="radio" id="male" name="type_user" value="1" onChange={(e) => handleOptionChange(e)} />
-                                                    <label for="nc"> New Customer</label><br />
+                                                    <label for="nc">New Customer</label><br />
                                                 </div>
                                                 <div className="col-sm-6">
                                                     <input type="radio" id="female" name="type_user" value="2" onChange={(e) => handleOptionChange(e)} />
-                                                    <label for="ec"> Existing Customer</label><br />
+                                                    <label for="ec">Existing Customer</label><br />
                                                 </div>
                                             </div>
                                             <hr />
                                         </div>
-                                        {customerForm === 1 ? <NewCustomerForm sendData={(data) => props.onSubmitForm(data, JSON.stringify(props.products.cartItems))} /> : <ExistingCustomerForm />}
+                                        {customerForm == 1 ? <NewCustomerForm sendData={(data) => props.onSubmitForm(data, JSON.stringify(props.products.cartItems))} /> : <ExistingCustomerForm />}
                                     </div>
                                 </div>
-                                {customerInfo ? <CustomerInfo customerInfo={customerInfo} sendData={() => props.onSubmitForm(customerInfo, JSON.stringify(props.products.cartItems))} /> : null}
+                                {customerInfo && customerForm == 2 ? <CustomerInfo customerInfo={customerInfo} sendData={() => props.onSubmitForm(customerInfo, JSON.stringify(props.products.cartItems))} /> : null}
                             </div>
                             <div className="col-sm-6 col-md-6">
                                 <hr className="offset-sm visible-sm" />
@@ -79,7 +80,7 @@ const Checkout = props => {
                         </div>
                     </div>
                 </div>
-            : <Thankyou customerInfo={ props.checkout.customerInfo.customer } orderCode={ props.checkout.orderCode } />}
+            : <Thankyou customerInfo={ customerInfo } orderCode={ orderCode } />}
         </div>
     )
 }
@@ -90,7 +91,7 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-    onSubmitForm: (item, products) => dispatch(addProductToCart(item, products)),
+    onSubmitForm: (item, products) => dispatch(createCustomerWithOrder(item, products)),
     onResetState: () => dispatch(resetState())
 });
 

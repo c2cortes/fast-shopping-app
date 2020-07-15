@@ -5,11 +5,26 @@ import { validateExistingCustomer } from './thunks';
 
 const ExistingCustomerForm = (props) => {
 
-    const [email, setEmail] = useState('')
+    const [email, setEmail] = useState('');
+
+    const validateEmail = mail => {
+        if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(mail)) {
+            return (true)
+        }
+        return (false)
+    }
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        props.onSubmitForm(email);
+
+        if(email == ""){
+            alert('Email is required');
+        } else if(!validateEmail(email)){
+            alert('Email is invalid');
+        } else {    
+            props.onSubmitForm(email);
+            setEmail('');
+        }
     }
 
     return (

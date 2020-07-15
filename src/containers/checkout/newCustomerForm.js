@@ -8,16 +8,38 @@ const NewCustomerForm = (props) => {
     const [phone, setPhone] = useState('')
     const [email, setEmail] = useState('')
 
+    const validateEmail = mail => {
+        if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(mail)) {
+            return (true)
+        }
+        return (false)
+    }
+
     const handleSubmit = (event) => {
         event.preventDefault();
-        const data = {
-            name,
-            identification,
-            address,
-            phone,
-            email
-        };
-        props.sendData(data);
+
+        if(name == ""){
+            alert('Name is required');
+        } else if(identification == ""){
+            alert('ID is required');
+        } else if(address == ""){
+            alert('Address is required');
+        } else if(phone == ""){
+            alert('Phone is required');
+        } else if(email == ""){
+            alert('Email is required');
+        } else if(!validateEmail(email)){
+            alert('Email is invalid');
+        } else {
+            const data = {
+                name,
+                identification,
+                address,
+                phone,
+                email
+            };
+            props.sendData(data);
+        }
     }
 
     return (

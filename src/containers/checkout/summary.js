@@ -1,6 +1,8 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import {getSummaryTotal} from '../products/thunks';
 
-const Summary = () => {
+const Summary = props => {
     return (
         <div className="panel panel-default">
             <div className="panel-body">
@@ -10,12 +12,12 @@ const Summary = () => {
                 <div className="container-fluid">
                     <div className="row">
                         <div className="col-xs-6">
-                            <p>Subtotal (7 items)</p>
+                            <p>Subtotal ({props.products.cartItems.length} items)</p>
                             <p>Discount</p>
                             <p>Delivery</p>
                         </div>
                         <div className="col-xs-6">
-                            <p><b>$1499</b></p>
+                            <p><b>${props.products.summaryTotal}</b></p>
                             <p><b>$0</b></p>
                             <p><b>$0</b></p>
                         </div>
@@ -28,7 +30,7 @@ const Summary = () => {
                             <h3 className="no-margin">Total sum</h3>
                         </div>
                         <div className="col-xs-6">
-                            <h3 className="no-margin">$1499</h3>
+                            <h3 className="no-margin">${props.products.summaryTotal}</h3>
                         </div>
                     </div>
                 </div>
@@ -38,4 +40,14 @@ const Summary = () => {
     )
 }
 
-export default Summary;
+function mapStateToProps(state) {
+    return {
+        products: state.products
+    }
+}
+
+const mapDispatchToProps = dispatch => ({
+    getSummaryTotal: () => dispatch(getSummaryTotal()),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Summary);

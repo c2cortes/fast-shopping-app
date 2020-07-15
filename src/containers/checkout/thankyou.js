@@ -11,7 +11,7 @@ const Thankyou = (props) => {
                 
                 <div className="col-sm-12">
                     <span>
-                        {props.customerInfo ? props.customerInfo.name : ''}, we have created your order #{props.orderCode}, Your items will be soon at your door.
+                        {props.customerInfo ? props.customerInfo.name + ', ' : ''} we have created your order #{props.orderCode}, Your items will be soon at your door.
                     </span>
                 </div>
 

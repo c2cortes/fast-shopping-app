@@ -1,6 +1,7 @@
 export const UPDATE_CUSTOMER_INFO = 'UPDATE_CUSTOMER_INFO';
 export const SET_CUSTOMER_FORM_MESSAGE = 'SET_CUSTOMER_FORM_MESSAGE';
 export const UPDATE_ORDER_CODE = 'UPDATE_ORDER_CODE';
+export const RESET_CUSTOMER_INFO = 'RESET_CUSTOMER_INFO';
 
 export const updateCustomerInfo = (customer) => {
 	return {
@@ -22,3 +23,11 @@ export const updateOrderCode = (code) => {
 		payload: code
 	}
 }
+
+export const resetCustomerInfo = (info = null) => {
+	return {
+		type: RESET_CUSTOMER_INFO,
+		payload: info
+	}
+}
+

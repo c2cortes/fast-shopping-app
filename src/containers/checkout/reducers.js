@@ -1,7 +1,7 @@
-import { UPDATE_CUSTOMER_INFO, SET_CUSTOMER_FORM_MESSAGE, UPDATE_ORDER_CODE } from './actions';
+import { UPDATE_CUSTOMER_INFO, SET_CUSTOMER_FORM_MESSAGE, UPDATE_ORDER_CODE, RESET_CUSTOMER_INFO } from './actions';
 
 const initialState = {
-    customerInfo: ''
+    customerInfo: {}
 };
 
 export const checkout = (state = initialState, action) => {
@@ -21,6 +21,11 @@ export const checkout = (state = initialState, action) => {
             return {
                 ...state,
                 orderCode: payload
+            }
+        case RESET_CUSTOMER_INFO:
+            return {
+                ...state,
+                customerInfo: payload
             }
         default:
             return state;
