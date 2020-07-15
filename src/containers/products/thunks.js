@@ -2,8 +2,9 @@ import { fetchProducts, addProductToCartAction, setTotal, updateSummaryTotal } f
 import Http from '../api/HttpRequest';
 
 export const loadProducts = () => async (dispatch, getState) => {
-    const request = await Http.get('products')
-    dispatch(fetchProducts(request.data));
+    await Http.get('products').then(response => {
+        dispatch(fetchProducts(response.data));
+    }).catch(error => alert(error));
 }
 
 export const addProductToCart = (item) => async (dispatch, getState) => {
