@@ -5,8 +5,8 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 In the project directory, run:
 
 ### `npm install`
-Make sure the serve is running at: http://localhost:3000 or set base url for the api in src/containers/api/HttpRequest.js line 4
-### 
+
+Make sure the server is running at: http://localhost:3000 or set base url for the api in src/containers/api/HttpRequest.js line 4
 
 ### `npm start`
 
